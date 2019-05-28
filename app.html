@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <h2 class ="text-center" > <b> CONTACTS </b>  </h2>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    </head>
+        <body>
+            <section id="app" class="container">
+                <!-- <div> -->
+                    <!-- <div class="form-group"> -->
+                        <!-- <label for="first_name">Name</label> -->
+                        <!-- <input type="text" class="form-control" id="first_name" v-model="firstName"/> -->
+
+                        <form>
+                                <label for="first_name">Name</label>
+                            <div class="form-row">
+                                <div class="col">
+                                <input type="text" class="form-control"  placeholder="First name" id="first_name" v-model="firstName"/>
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="Last name" id="last_name" v-model="LastName"/>
+                            </div>
+                                </div>
+                              </form>
+                    <!-- </div> -->
+                    <div class="form-group">
+                        <label for="email_ID">Mail ID</label>
+                        <input type="text" class="form-control" id="email_ID" v-model="Email"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone_no">Phone Number</label>
+                        <input type="text" class="form-control" for="phone_no" v-model="phoneNo"/>
+                    </div>
+                        <button class="btn btn-primary" @click="saveContact()">Submit</button>
+                </div>
+
+            <table class="table">
+                <tr>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>Mail ID</th>
+                    <th>Phone Number</th>
+                    <th>Actions</th>
+                </tr>
+                <tr v-for="(contact, index) in contacts">
+                    <td>{{contact.firstName}}</td>
+                    <td>{{contact.LastName}}</td>
+                    <td>{{contact.Email}}</td>
+                    <td>{{contact.phoneNo}}</td>
+                <td>
+                    <!-- <button  class="btn btn-lg btn-danger" data-toggle="popover" title="Conformation" data-content="Are you sure want to delete this contact">Click to toggle popover</button> -->
+                    <button type="button" class="btn btn-xs btn-danger" data-toggle="popover" title="Are you sure ?want to delete this contact" @click="deleteContact(index)"><b>Delete</b></button>
+                    <button type="button" class="btn btn-info" style="align-content: right; position: fixed; margin-bottom: 0px"><b>EDIT</b></button>
+                </td>
+                </tr>
+            </table>
+            {{contacts}}
+            </section>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+        message: 'Hello Vue!',
+        contacts: [],
+        firstName: '',
+        LastName: '',
+        Email: '',
+        phoneNo: '',
+        },
+    methods: 
+    {   
+    saveContact()
+     {
+        const contactInfo = {firstName: this.firstName, LastName: this.LastName, Email: this.Email, phoneNo: this.phoneNo}
+        this.contacts.push(contactInfo);
+        this.firstName = this.LastName = this.Email = this.phoneNo = ''; //for emptying the list
+        
+    },
+    deleteContact(index)
+    {
+        this.contactInfo=this.contacts.splice(index,1);
+    },
+    editContact(index)
+    {
+        this.contactInfo=this.contacts.update(name,index);
+    }
+    },
+    
+    })
+    </script>
+    </body>
+</html>
+

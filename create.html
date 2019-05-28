@@ -1,0 +1,63 @@
+<html>
+<head>
+    <title>My Table</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+
+<section id="app" class="container">
+    <div>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" v-model="Name"/>
+        </div>
+        <div class="form-group">
+            <label for="phone_no">Contact</label>
+            <input type="text" class="form-control" for="phone_no" v-model="phoneNo"/>
+		</div>
+		<div class="form-group">
+				<label for="name">Email</label>
+				<input type="text" class="form-control" id="email_name" v-model="Email"/>
+		</div>
+        <button class="btn btn-warning" @click="saveContact()">Submit</button>
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Email</th>
+        </tr>
+        <tr v-for="(contact, index) in contacts">
+            <td>{{contact.Name}}</td>
+            <td>{{contact.phoneNo}}</td>
+            <td>{{contact.Email}}</td>
+        </tr>
+    </table>
+    {{contacts}}
+</section>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello Vue!',
+      contacts: [],
+      Name: '',
+      phoneNo: '',
+      Email: '',
+    },
+    methods: {
+      saveContact() {
+        const contactInfo = {Name: this.Name, phoneNo: this.phoneNo, Email: this.Email}
+        this.contacts.push(contactInfo);
+        this.Name = this.phoneNo = this.Email = '';
+      }
+    },
+  })
+</script>
+</body>
+</html>
